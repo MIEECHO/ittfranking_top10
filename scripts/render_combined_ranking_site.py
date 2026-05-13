@@ -108,9 +108,7 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       color: var(--ink);
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
       background:
-        radial-gradient(circle at 12% 0%, rgba(125, 158, 194, 0.28), transparent 34%),
-        radial-gradient(circle at 88% 4%, rgba(210, 176, 192, 0.34), transparent 36%),
-        linear-gradient(135deg, #f7f8fb 0%, #f3f0f3 50%, #eef3f8 100%);
+        linear-gradient(180deg, #F5F7FB 0%, #EEF3F8 100%);
       padding: 28px;
     }}
     .shell {{
@@ -119,41 +117,77 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
     }}
     .hero {{
       display: grid;
-      gap: 16px;
+      gap: 28px;
       grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      margin-bottom: 18px;
+      align-items: center;
+      margin-bottom: 22px;
+      padding: 2px 2px 4px;
     }}
-    h1 {{
+    .title {{
       margin: 0;
-      font-size: clamp(30px, 5vw, 56px);
-      line-height: 0.95;
-      letter-spacing: -0.055em;
+      line-height: 1;
+    }}
+    .title-main {{
+      display: block;
+      color: #94A3B8;
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }}
+    .title-sub {{
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(32px, 4.2vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
     }}
     .deck {{
-      margin: 10px 0 0;
-      max-width: 660px;
+      margin: 12px 0 0;
+      max-width: 620px;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.6;
     }}
     .range-card {{
-      min-width: 210px;
-      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+      padding: 18px 20px 20px;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.62);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.48)),
+        linear-gradient(135deg, rgba(125, 158, 194, 0.12), rgba(210, 176, 192, 0.14));
       backdrop-filter: blur(14px);
-      box-shadow: 0 18px 44px rgba(38, 47, 67, 0.08);
+      box-shadow: 0 18px 46px rgba(38, 47, 67, 0.07);
+    }}
+    .range-card::before {{
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--men-b), var(--women-b));
+      opacity: 0.75;
     }}
     .range-card strong {{
       display: block;
-      font-size: 22px;
-      letter-spacing: -0.02em;
+      margin-top: 7px;
+      margin-left: 0;
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.25;
+      font-weight: 650;
+      letter-spacing: -0.01em;
     }}
-    .range-card span {{
+    .range-eyebrow {{
+      display: block;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 14px;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+    }}
+    .range-dash {{
+      color: #64748B;
+      font-weight: 700;
     }}
     .tabs {{
       display: flex;
@@ -335,6 +369,10 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       }}
       .hero {{
         grid-template-columns: 1fr;
+        gap: 16px;
+      }}
+      .range-card {{
+        padding: 16px 18px 18px;
       }}
       .race-head {{
         display: block;
@@ -363,13 +401,12 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
   <main class="shell">
     <section class="hero">
       <div>
-        <h1>ITTF Singles<br />Top 10</h1>
-        <p class="deck">男单与女单世界排名前十动画，数据区间从 {first_week_label} 到 {last_week_label}。页面为单文件静态网页，适合直接部署到 GitHub Pages。</p>
+        <h1 class="title"><span class="title-main">ITTF RANKINGS</span><span class="title-sub">Singles Top 10</span></h1>
+        <p class="deck">追踪 {first_week} 至 {last_week} 的男女单打世界前十变化</p>
       </div>
       <div class="range-card">
-        <span>洛杉矶周期</span>
-        <strong>{cycle_range_label}</strong>
-        <span>Men & Women Top 10</span>
+        <div class="range-eyebrow">洛杉矶周期</div>
+        <strong>{first_week_label}<span class="range-dash"> - </span>{last_week_label}</strong>
       </div>
     </section>
 
