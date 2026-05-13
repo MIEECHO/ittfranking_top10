@@ -449,7 +449,7 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       </div>
     </section>
 
-    <p class="footnote">Source: ITTF weekly world ranking screenshots, manually/OCR curated for this visualization.</p>
+    <p class="footnote">数据来源：ITTF</p>
   </main>
 
   <script>
