@@ -1,5 +1,9 @@
-# ITTF Singles Top 10 Ranking Race
+# ITTF Rankings Singles Top 10
 
-Public GitHub Pages build for the combined men/women ITTF top 10 ranking race.
+This branch hosts the public GitHub Pages build for the ITTF men/women singles top 10 ranking race.
 
-If Pages is not enabled automatically, set GitHub Pages source to `gh-pages` branch, `/ (root)`.
+Public page:
+
+[https://mieecho.github.io/ittfranking_top10/](https://mieecho.github.io/ittfranking_top10/)
+
+Source data and maintenance scripts live on the `main` branch.
