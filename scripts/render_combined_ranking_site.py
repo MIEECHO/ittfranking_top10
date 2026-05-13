@@ -16,6 +16,13 @@ def week_key(week: str) -> tuple[int, int]:
     return int(year), int(week_no)
 
 
+def format_week_label(week: object) -> str:
+    if not week:
+        return ""
+    year, week_no = week_key(str(week))
+    return f"{year}年第{week_no}周"
+
+
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
@@ -72,6 +79,9 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
     women_payload = json.dumps(women_frames, ensure_ascii=False)
     first_week = men_frames[0]["week"] if men_frames else ""
     last_week = men_frames[-1]["week"] if men_frames else ""
+    first_week_label = format_week_label(first_week)
+    last_week_label = format_week_label(last_week)
+    cycle_range_label = f"{first_week_label} - {last_week_label}" if first_week_label and last_week_label else ""
     return f"""<!doctype html>
 <html lang="zh">
 <head>
@@ -354,11 +364,11 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
     <section class="hero">
       <div>
         <h1>ITTF Singles<br />Top 10</h1>
-        <p class="deck">男单与女单世界排名前十动画，数据区间从 {first_week} 到 {last_week}。页面为单文件静态网页，适合直接部署到 GitHub Pages。</p>
+        <p class="deck">男单与女单世界排名前十动画，数据区间从 {first_week_label} 到 {last_week_label}。页面为单文件静态网页，适合直接部署到 GitHub Pages。</p>
       </div>
       <div class="range-card">
-        <span>Current range</span>
-        <strong>{first_week} - {last_week}</strong>
+        <span>洛杉矶周期</span>
+        <strong>{cycle_range_label}</strong>
         <span>Men & Women Top 10</span>
       </div>
     </section>
