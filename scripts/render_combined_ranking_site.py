@@ -302,12 +302,34 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       left: 56px;
       top: 8px;
       z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       max-width: calc(100% - 220px);
+      overflow: hidden;
+      color: white;
+      font-weight: 800;
+    }}
+    .trend {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      min-width: 16px;
+      font-size: 14px;
+      line-height: 1;
+      text-shadow: none;
+    }}
+    .trend.up {{
+      color: #0f9f4f;
+    }}
+    .trend.down {{
+      color: #e03131;
+    }}
+    .player {{
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: white;
-      font-weight: 800;
     }}
     .race-card.men .name {{
       text-shadow:
@@ -589,7 +611,7 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
         row.innerHTML = `
           <div class="bar"></div>
           <div class="rank"></div>
-          <div class="name"></div>
+          <div class="name"><span class="trend"></span><span class="player"></span></div>
           <div class="points"></div>
         `;
         this.chart.appendChild(row);
@@ -600,6 +622,8 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       render(i) {{
         const frame = this.frames[i];
         if (!frame) return;
+        const prevFrame = this.frames[i - 1] || null;
+        const prevRankByName = new Map((prevFrame?.rows || []).map(r => [r.name, Number(r.rank)]));
         this.weekLabel.textContent = `周次：${{frame.week}}`;
         const maxPoints = Math.max(...frame.rows.map(r => Number(r.points)));
         const activeNames = new Set(frame.rows.map(r => r.name));
@@ -612,16 +636,22 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
 
           const bar = row.querySelector('.bar');
           const rank = row.querySelector('.rank');
-          const name = row.querySelector('.name');
+          const trend = row.querySelector('.trend');
+          const player = row.querySelector('.player');
           const points = row.querySelector('.points');
           const width = maxPoints > 0 ? (Number(rowData.points) / maxPoints) * 88 : 0;
           const colors = flagPalette(rowData.assoc, rowData.rank, this.kind);
           const flag = shouldHideFlag(this.kind, rowData.name) ? '' : codeToFlag(rowData.assoc);
+          const prevRank = prevRankByName.get(rowData.name);
+          const rankDelta = Number.isFinite(prevRank) ? prevRank - Number(rowData.rank) : 0;
 
           bar.style.background = `linear-gradient(90deg, ${{colors[0]}}, ${{colors[1]}})`;
           bar.style.width = `${{width.toFixed(2)}}%`;
           rank.textContent = `${{rowData.rank}}`;
-          name.textContent = `${{rowData.name}}${{flag ? ' ' + flag : ''}}`;
+          trend.className = `trend ${{rankDelta > 0 ? 'up' : rankDelta < 0 ? 'down' : ''}}`;
+          trend.textContent = rankDelta > 0 ? '▲' : rankDelta < 0 ? '▼' : '';
+          trend.title = rankDelta > 0 ? `上升 ${{rankDelta}} 位` : rankDelta < 0 ? `下降 ${{Math.abs(rankDelta)}} 位` : '';
+          player.textContent = `${{rowData.name}}${{flag ? ' ' + flag : ''}}`;
           points.textContent = Number(rowData.points).toLocaleString('en-US');
         }}
 
