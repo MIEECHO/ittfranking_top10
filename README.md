@@ -8,7 +8,7 @@
 
 ## 项目内容
 
-当前数据范围：`2024-W32` 至 `2026-W21`
+当前数据范围：`2024-W32` 至 `2026-W22`
 
 覆盖榜单：
 
@@ -42,7 +42,7 @@ data/ittf_men_top10_2024W32_2026W16_clean.csv
 data/ittf_women_top10_2024W32_2026W16_clean.csv
 ```
 
-虽然文件名保留了初始整理时的 `2026W16`，但当前内容已经持续更新到 `2026-W21`。
+虽然文件名保留了初始整理时的 `2026W16`，但当前内容已经持续更新到 `2026-W22`。
 
 每周增量数据放在：
 
@@ -53,20 +53,20 @@ data/weekly_updates/
 示例：
 
 ```text
-data/weekly_updates/men_2026_W21.csv
-data/weekly_updates/women_2026_W21.csv
+data/weekly_updates/men_2026_W22.csv
+data/weekly_updates/women_2026_W22.csv
 ```
 
 CSV 字段格式：
 
 ```csv
 week,rank,name,assoc,points
-2026-W21,1,WANG Chuqin,CHN,12152
+2026-W22,1,WANG Chuqin,CHN,10677
 ```
 
 字段说明：
 
-- `week`：周次，例如 `2026-W21`
+- `week`：周次，例如 `2026-W22`
 - `rank`：排名，1 到 10
 - `name`：运动员姓名
 - `assoc`：协会代码，例如 `CHN`、`JPN`、`MAC`
