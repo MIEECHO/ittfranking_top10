@@ -292,20 +292,20 @@ def page_html(men_frames: list[dict[str, object]], women_frames: list[dict[str, 
       position: absolute;
       left: 10px;
       top: 9px;
-      width: 42px;
+      width: 30px;
       font-weight: 900;
       color: rgba(30, 39, 58, 0.78);
       z-index: 3;
     }}
     .name {{
       position: absolute;
-      left: 56px;
+      left: 42px;
       top: 8px;
       z-index: 3;
       display: flex;
       align-items: center;
       gap: 6px;
-      max-width: calc(100% - 220px);
+      max-width: calc(100% - 206px);
       overflow: hidden;
       color: white;
       font-weight: 800;
