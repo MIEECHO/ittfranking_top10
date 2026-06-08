@@ -559,14 +559,15 @@
           const colors = flagPalette(rowData.assoc, rowData.rank, this.kind);
           const flag = shouldHideFlag(this.kind, rowData.name) ? '' : codeToFlag(rowData.assoc);
           const prevRank = prevRankByName.get(rowData.name);
-          const rankDelta = Number.isFinite(prevRank) ? prevRank - Number(rowData.rank) : 0;
+          const isNewEntry = prevFrame && !Number.isFinite(prevRank);
+          const rankDelta = Number.isFinite(prevRank) ? prevRank - Number(rowData.rank) : (isNewEntry ? 1 : 0);
 
           bar.style.background = `linear-gradient(90deg, ${colors[0]}, ${colors[1]})`;
           bar.style.width = `${width.toFixed(2)}%`;
           rank.textContent = `${rowData.rank}`;
           trend.className = `trend ${rankDelta > 0 ? 'up' : rankDelta < 0 ? 'down' : ''}`;
           trend.textContent = rankDelta > 0 ? '▲' : rankDelta < 0 ? '▼' : '';
-          trend.title = rankDelta > 0 ? `上升 ${rankDelta} 位` : rankDelta < 0 ? `下降 ${Math.abs(rankDelta)} 位` : '';
+          trend.title = isNewEntry ? '新进前十' : rankDelta > 0 ? `上升 ${rankDelta} 位` : rankDelta < 0 ? `下降 ${Math.abs(rankDelta)} 位` : '';
           player.textContent = `${rowData.name}${flag ? ' ' + flag : ''}`;
           points.textContent = Number(rowData.points).toLocaleString('en-US');
         }
