@@ -1,0 +1,13 @@
+{
+  "week": "2026-W44",
+  "publication_date": "2026-10-26",
+  "publisher": "WTT official Weibo account",
+  "post_url": "https://weibo.com/2/detail/5358342751129449",
+  "readable_post_url": "https://www.sina.cn/news/detail/5358342751129449.html",
+  "method": "Downloaded official top-ten posters and visually verified all names, ranks and points; all twenty rows also match the independently fetched Butterfly table.",
+  "cross_check_url": "https://butterflyonline.com/world-top-20/",
+  "images": {
+    "men": {"url": "https://wx4.sinaimg.cn/large/008fmYuqly8iify8vasxhj30u011ijz3.jpg", "file": "2026_W44_men.jpg"},
+    "women": {"url": "https://wx1.sinaimg.cn/large/008fmYuqly8iify8x2tlnj30u011itfs.jpg", "file": "2026_W44_women.jpg"}
+  }
+}

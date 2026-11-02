@@ -1,0 +1,12 @@
+{
+  "week": "2026-W43",
+  "publication_date": "2026-10-19",
+  "publisher": "WTT official Weibo account",
+  "post_url": "https://weibo.com/2/detail/5355763066995623",
+  "readable_post_url": "https://sina.cn/news/detail/5355763066995623.html",
+  "method": "Downloaded official top-ten posters and visually verified all names, ranks and points. English names and association codes follow existing dataset conventions.",
+  "images": {
+    "men": {"url": "https://wx4.sinaimg.cn/large/008fmYuqly8ii7pz11ks8j30u011in4v.jpg", "file": "2026_W43_men.jpg"},
+    "women": {"url": "https://wx4.sinaimg.cn/large/008fmYuqly8ii7q04bsznj30u011itfs.jpg", "file": "2026_W43_women.jpg"}
+  }
+}

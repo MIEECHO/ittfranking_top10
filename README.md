@@ -8,7 +8,7 @@
 
 ## 项目内容
 
-当前数据范围：`2024-W32` 至 `2026-W41`
+当前数据范围：`2024-W32` 至 `2026-W44`
 
 覆盖榜单：
 
@@ -42,7 +42,7 @@ data/ittf_men_top10_2024W32_2026W16_clean.csv
 data/ittf_women_top10_2024W32_2026W16_clean.csv
 ```
 
-虽然文件名保留了初始整理时的 `2026W16`，但当前内容已经持续更新到 `2026-W41`。
+虽然文件名保留了初始整理时的 `2026W16`，但当前内容已经持续更新到 `2026-W44`。
 
 每周增量数据放在：
 
@@ -53,26 +53,45 @@ data/weekly_updates/
 示例：
 
 ```text
-data/weekly_updates/men_2026_W41.csv
-data/weekly_updates/women_2026_W41.csv
+data/weekly_updates/men_2026_W44.csv
+data/weekly_updates/women_2026_W44.csv
 ```
 
 CSV 字段格式：
 
 ```csv
 week,rank,name,assoc,points
-2026-W41,1,Sora MATSUSHIMA,JPN,6930
+2026-W44,1,Sora MATSUSHIMA,JPN,8550
 ```
 
 字段说明：
 
-- `week`：周次，例如 `2026-W41`
+- `week`：周次，例如 `2026-W44`
 - `rank`：排名，1 到 10
 - `name`：运动员姓名
 - `assoc`：协会代码，例如 `CHN`、`JPN`、`MAC`
 - `points`：积分
 
 ## 周更流程
+
+可先尝试从 ITTF 官方 HTML 榜单抓取，不需要截图：
+
+```bash
+python3 scripts/fetch_weekly_rankings.py --week 2026-W44
+```
+
+如果官方站点被 Cloudflare 拦截，可显式允许 Butterfly 转载表格作为备用源：
+
+```bash
+python3 scripts/fetch_weekly_rankings.py --week 2026-W44 --allow-butterfly
+```
+
+脚本只将通过校验的男女单 CSV、原始 HTML 和来源记录存入
+`data/fetched_rankings/2026-W44/`，不会修改主表或发布页面。
+备用源只提供当前页面周次；与指定周次不一致时会拒绝导入，不能用最新榜单补历史空周。
+已有输出目录不会覆盖。核对来源和数据后，再将 CSV 交给下面的周更脚本。
+微博 ITTF 官方账号、WTT 官方账号及“草莓牛奶特别甜”可用于人工复核，
+但正文常缺少完整积分，尚未接入自动导入。
 
 准备好男单、女单本周 CSV 后，运行：
 
@@ -141,7 +160,12 @@ python3 scripts/render_combined_ranking_site.py \
 
 ## 数据说明
 
-数据来自 ITTF 世界排名页面截图整理，并经过 OCR、人工校对和一致性检查。由于原始页面排名会随周次更新，建议每次新增数据后检查：
+历史数据来自 ITTF 世界排名页面截图整理，并经过 OCR、人工校对和一致性检查。
+W42-W44 已改用直接下载的 WTT 官方微博排名配图，逐项核对前十名及积分；
+W44 另外与 Butterfly 转载表格交叉核对一致。
+官方配图及逐周来源记录保存在 `data/weekly_updates/sources/`。
+截至本次抓取（2026-11-02），能核实的最新榜单为 W44，W45 尚未获取到正式数据，未用预测排名补入。
+由于原始页面排名会随周次更新，建议每次新增数据后检查：
 
 - 名字拼写是否准确
 - 协会代码是否正确
