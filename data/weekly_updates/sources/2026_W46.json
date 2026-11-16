@@ -1,0 +1,17 @@
+{
+  "week": "2026-W46",
+  "publication_date": "2026-11-09",
+  "publisher": "WTT official Weibo account",
+  "readable_post_url": "https://3g.sina.com.cn/news/detail/5363373056198287.html",
+  "method": "Visually verified all twenty entries against the WTT top-ten posters.",
+  "images": {
+    "men": {
+      "url": "https://wx4.sinaimg.cn/middle/008fmYuqly8iivzzsafd8j30u011itgf.jpg",
+      "file": "2026_W46_men.jpg"
+    },
+    "women": {
+      "url": "https://wx4.sinaimg.cn/middle/008fmYuqly8iivzzyw3wdj30u011igso.jpg",
+      "file": "2026_W46_women.jpg"
+    }
+  }
+}
